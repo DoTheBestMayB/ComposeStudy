@@ -65,6 +65,7 @@ fun Counter(modifier: Modifier = Modifier) {
  *  그래서 State는 non-composable 람다에서 변경해야 한다.
  *  onClick은 non-composable 람다임
  */
+
 @Composable
 fun CounterInfinityLoop(modifier: Modifier = Modifier) {
     // configuration change와 같은 이유로 Compose UI hierarchy가 다시 생성되면
@@ -84,6 +85,9 @@ fun CounterInfinityLoop(modifier: Modifier = Modifier) {
                 counter++
             }
         ) {
+            // UI가 처음 그려지는 시점에 이 코드가 recomposition을 유발하지 않는다.
+            // GPT에게 물어보니 compose compiler 최적화에 의해 처음 UI를 그리는 시점에 발생하는 변화는 recomposition을 유발하지 않는다고 한다.
+            // 강의 댓글에 다른 분이 비슷한 질문을 올렸는데, 아직 pl 답변이 달리지 않아서, 답변이 달리면 내용 추가 예정
             counter++
             Text("Count: $counter")
         }
@@ -108,11 +112,11 @@ fun CommonMistake(modifier: Modifier = Modifier) {
         )
     }
 
-    var itemsRight by rememberSaveable {
-        mutableStateOf(
-            listOf<String>()
-        )
-    }
+//    var itemsRight by rememberSaveable {
+//        mutableStateOf(
+//            listOf<String>()
+//        )
+//    }
 
     Box(
         modifier = Modifier
