@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.dothebestmayb.composestudy.state_management.number_guess.NumberGuessScreenRoot
+import com.dothebestmayb.composestudy.state_management.home_work.TodoScreenRoot
 import com.dothebestmayb.composestudy.ui.theme.ComposeStudyTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeStudyTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    NumberGuessScreenRoot(
+                    TodoScreenRoot(
                         modifier = Modifier
                             .padding(innerPadding)
                     )
