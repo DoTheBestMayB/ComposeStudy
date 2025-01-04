@@ -94,12 +94,26 @@ fun Post(
             }
         }
 
-        Text(
-            text = project.description,
-            color = Color.White,
+        // What I change
+        Row(
             modifier = Modifier
-                .padding(horizontal = 32.dp)
-        )
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            Icon(
+                imageVector = Icons.Default.Check,
+                contentDescription = null,
+                tint = Color.Transparent,
+                modifier = Modifier
+                    .size(20.dp)
+            )
+            Text(
+                text = project.description,
+                color = Color.White,
+                modifier = Modifier.padding(end = 8.dp)
+            )
+        }
+
         Text(
             text = project.formattedDateTime,
             color = Color.White,
