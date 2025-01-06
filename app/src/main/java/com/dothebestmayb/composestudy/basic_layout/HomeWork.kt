@@ -47,7 +47,7 @@ fun Post(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .clip(RoundedCornerShape(5.dp))
             .background(Color(0xFFE87457))
             .padding(12.dp),

@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.dothebestmayb.composestudy.basic_modifier.SpacingModifierDemo
 import com.dothebestmayb.composestudy.basic_modifier.SpacingModifierLazyDemo
 import com.dothebestmayb.composestudy.basic_modifier.SpacingModifierScaffoldAndWindowInsetsDemo
+import com.dothebestmayb.composestudy.basic_modifier.self_study.WipeToReplyRoot
 import com.dothebestmayb.composestudy.state_management.home_work.TodoScreenRoot
 import com.dothebestmayb.composestudy.ui.theme.ComposeStudyTheme
 
@@ -25,29 +26,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeStudyTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    SpacingModifierScaffoldAndWindowInsetsDemo(
-                        modifier = Modifier
-                            .padding(innerPadding)
-                            .consumeWindowInsets(innerPadding)
-                    )
+                    WipeToReplyRoot(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ComposeStudyTheme {
-        Greeting("Android")
     }
 }
