@@ -16,6 +16,8 @@ import com.dothebestmayb.composestudy.basic_modifier.SpacingModifierDemo
 import com.dothebestmayb.composestudy.basic_modifier.SpacingModifierLazyDemo
 import com.dothebestmayb.composestudy.basic_modifier.SpacingModifierScaffoldAndWindowInsetsDemo
 import com.dothebestmayb.composestudy.basic_modifier.self_study.WipeToReplyRoot
+import com.dothebestmayb.composestudy.measurements.SizeModifierDemo
+import com.dothebestmayb.composestudy.measurements.WidthExample
 import com.dothebestmayb.composestudy.state_management.home_work.TodoScreenRoot
 import com.dothebestmayb.composestudy.ui.theme.ComposeStudyTheme
 
@@ -25,9 +27,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposeStudyTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    WipeToReplyRoot(modifier = Modifier.padding(innerPadding))
-                }
+                WidthExample()
+//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+//                    WipeToReplyRoot(modifier = Modifier.padding(innerPadding))
+//                }
             }
         }
     }
