@@ -4,6 +4,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.AnchoredDraggableState
 import androidx.compose.foundation.gestures.DraggableAnchors
 import androidx.compose.foundation.gestures.Orientation
@@ -29,10 +30,13 @@ import androidx.compose.foundation.overscroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -50,7 +54,9 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -151,10 +157,10 @@ fun WipeToReply(
 
     val density = LocalDensity.current
 
-    LaunchedEffect(state.isScrollToBottom) {
-        if (state.isScrollToBottom) {
-            scrollState.scrollToItem(state.messages.lastIndex)
-            onAction(WipeToReplyAction.OnScrollBottomConsumed)
+    LaunchedEffect(state.scrollDestination) {
+        if (state.scrollDestination != null) {
+            scrollState.scrollToItem(state.scrollDestination)
+            onAction(WipeToReplyAction.OnScrollConsumed)
         }
     }
 
@@ -209,6 +215,7 @@ fun WipeToReply(
                         .collectLatest {
                             if (it == SwipeToReplyValue.REPLYING) {
                                 focusRequester.requestFocus()
+                                onAction(WipeToReplyAction.OnMessageSwiped(messageInfo))
                                 delay(100)
                                 messageDragState.animateTo(
                                     SwipeToReplyValue.RESTING
@@ -244,8 +251,55 @@ fun WipeToReply(
                 .padding(bottom = 18.dp)
                 .onGloballyPositioned { coordinates ->
                     headerHeight = coordinates.size.height
-                }
+                },
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
+            if (state.replyInfo.replyTargetMessageInfo != null) {
+                Row(
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                        contentDescription = "Reply Message",
+                    )
+                    Column(
+                        modifier = Modifier
+                            .weight(1f)
+                            .clickable(
+                                enabled = true,
+                                onClick = {
+                                    onAction(WipeToReplyAction.OnScroll(state.replyInfo.replyTargetMessageInfo.messageId))
+                                }
+                            )
+                    ) {
+                        Text(
+                            text = "${state.replyInfo.replyTargetMessageInfo.sender}에게 답장",
+                            style = MaterialTheme.typography.bodyLarge,
+                            fontWeight = FontWeight.Bold,
+                        )
+                        Text(
+                            text = state.replyInfo.replyTargetMessageInfo.message,
+                            style = MaterialTheme.typography.bodyLarge,
+                            overflow = TextOverflow.Ellipsis,
+                            maxLines = 1,
+                        )
+                    }
+                    IconButton(
+                        onClick = {
+                            onAction(WipeToReplyAction.OnClearReplyTarget)
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Clear,
+                            contentDescription = "clear reply target",
+                        )
+                    }
+                }
+
+            }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
@@ -285,6 +339,12 @@ private fun WipeToReplyDemoPreview() {
             state = WipeToReplyState(
                 replyInfo = MessageInfo(
                     message = "",
+                    replyTargetMessageInfo = MessageInfo(
+                        messageId = UUID.randomUUID(),
+                        message = "necessitatibus necessitatibus necessitatibus necessitatibus ",
+                        replyTargetMessageInfo = null,
+                        sender = MessageSender.OTHER,
+                    ),
                     sender = MessageSender.ME,
                 ),
                 messages = listOf(

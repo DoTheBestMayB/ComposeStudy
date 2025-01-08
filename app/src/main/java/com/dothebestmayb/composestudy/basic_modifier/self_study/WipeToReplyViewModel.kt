@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import java.util.UUID
 
-class WipeToReplyViewModel: ViewModel() {
+class WipeToReplyViewModel : ViewModel() {
 
     private val _state = MutableStateFlow(
         WipeToReplyState(
@@ -31,7 +31,7 @@ class WipeToReplyViewModel: ViewModel() {
                             message = "",
                             sender = MessageSender.ME,
                         ),
-                        isScrollToBottom = true,
+                        scrollDestination = it.messages.size,
                         messages = it.messages + it.replyInfo
                     )
                 }
@@ -47,10 +47,43 @@ class WipeToReplyViewModel: ViewModel() {
                 }
             }
 
-            WipeToReplyAction.OnScrollBottomConsumed -> {
+            WipeToReplyAction.OnScrollConsumed -> {
                 _state.update {
                     it.copy(
-                        isScrollToBottom = false,
+                        scrollDestination = null,
+                    )
+                }
+            }
+
+            WipeToReplyAction.OnClearReplyTarget -> {
+                _state.update {
+                    it.copy(
+                        replyInfo = it.replyInfo.copy(
+                            replyTargetMessageInfo = null,
+                        )
+                    )
+                }
+            }
+
+            is WipeToReplyAction.OnScroll -> {
+                _state.update {
+                    val scrollIndex = it.messages.indexOfFirst { messageInfo ->
+                        messageInfo.messageId == wipeToReplyAction.messageId
+                    }.takeIf { index ->
+                        index != -1
+                    }
+                    it.copy(
+                        scrollDestination = scrollIndex
+                    )
+                }
+            }
+
+            is WipeToReplyAction.OnMessageSwiped -> {
+                _state.update {
+                    it.copy(
+                        replyInfo = it.replyInfo.copy(
+                            replyTargetMessageInfo = wipeToReplyAction.messageInfo,
+                        )
                     )
                 }
             }
