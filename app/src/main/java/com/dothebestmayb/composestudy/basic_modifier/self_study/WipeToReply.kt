@@ -150,45 +150,6 @@ fun WipeToReply(
     val scrollState = rememberLazyListState()
 
     val density = LocalDensity.current
-    val decayAnimationSpec = rememberSplineBasedDecay<Float>()
-
-    val messageDragState = remember {
-        AnchoredDraggableState(
-            initialValue = SwipeToReplyValue.RESTING,
-            anchors = DraggableAnchors {
-                val replyOffset = with(density) {
-                    48.dp.toPx()
-                }
-                SwipeToReplyValue.RESTING at 0f
-                SwipeToReplyValue.REPLYING at replyOffset
-            },
-            positionalThreshold = { density ->
-                density * 0.5f
-            },
-            velocityThreshold = {
-                with(density) {
-                    100.dp.toPx()
-                }
-            },
-            snapAnimationSpec = tween(),
-            decayAnimationSpec = decayAnimationSpec,
-        )
-    }
-
-    val messageOverscroll = ScrollableDefaults.overscrollEffect()
-
-    LaunchedEffect(messageDragState) {
-        snapshotFlow { messageDragState.settledValue }
-            .collectLatest {
-                if (it == SwipeToReplyValue.REPLYING) {
-                    focusRequester.requestFocus()
-                    delay(100)
-                    messageDragState.animateTo(
-                        SwipeToReplyValue.RESTING
-                    )
-                }
-            }
-    }
 
     LaunchedEffect(state.isScrollToBottom) {
         if (state.isScrollToBottom) {
@@ -211,9 +172,53 @@ fun WipeToReply(
             state = scrollState,
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            items(items = state.messages, key = { it.messageId }) {
+            items(items = state.messages, key = { it.messageId }) { messageInfo ->
+                val messageOverscroll = ScrollableDefaults.overscrollEffect()
+
+                val decayAnimationSpec = rememberSplineBasedDecay<Float>()
+
+                val messageDragState = remember {
+                    AnchoredDraggableState(
+                        initialValue = SwipeToReplyValue.RESTING,
+                        anchors = DraggableAnchors {
+                            val replyOffset = with(density) {
+                                if (messageInfo.sender == MessageSender.ME) {
+                                    -48.dp.toPx()
+                                } else {
+                                    48.dp.toPx()
+                                }
+                            }
+                            SwipeToReplyValue.RESTING at 0f
+                            SwipeToReplyValue.REPLYING at replyOffset
+                        },
+                        positionalThreshold = { density ->
+                            density * 0.5f
+                        },
+                        velocityThreshold = {
+                            with(density) {
+                                100.dp.toPx()
+                            }
+                        },
+                        snapAnimationSpec = tween(),
+                        decayAnimationSpec = decayAnimationSpec,
+                    )
+                }
+
+                LaunchedEffect(messageDragState) {
+                    snapshotFlow { messageDragState.settledValue }
+                        .collectLatest {
+                            if (it == SwipeToReplyValue.REPLYING) {
+                                focusRequester.requestFocus()
+                                delay(100)
+                                messageDragState.animateTo(
+                                    SwipeToReplyValue.RESTING
+                                )
+                            }
+                        }
+                }
+
                 Message(
-                    messageInfo = it,
+                    messageInfo = messageInfo,
                     modifier = Modifier
                         .padding(start = 12.dp)
                         .anchoredDraggable(
