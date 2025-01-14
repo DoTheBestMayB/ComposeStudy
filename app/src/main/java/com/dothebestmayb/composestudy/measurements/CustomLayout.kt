@@ -73,8 +73,10 @@ fun PagedRow(
         }
 
         val pageItems = pages.getOrNull(page) ?: emptyList()
+        val maxHeight = pageItems.fastMaxOfOrNull { it.height } ?: 0
 
-        layout(constraints.maxWidth, constraints.maxHeight) {
+        // layout의 실제 크기를 설정함
+        layout(constraints.maxWidth, maxHeight) {
             var xOffset = 0
             pageItems.fastForEach { placeable ->
                 placeable.place(xOffset, 0)
