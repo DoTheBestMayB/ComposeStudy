@@ -10,10 +10,10 @@ import androidx.compose.ui.unit.dp
 import com.dothebestmayb.composestudy.ui.theme.ComposeStudyTheme
 
 /**
- * Composition phase : Composable이 그려지는 3단계 중 첫 번째로, 어떤 것을 그려야 할지 결정하는 단계
+ * Composition pass : Composable이 그려지는 3단계 중 첫 번째로, 어떤 것을 그려야 할지 결정하는 단계
  * composable 간의 hierarchy를 설정함
  *
- * Measurement phase : Composable의 크기를 측정하는 단계
+ * Measurement pass : Composable의 크기를 측정하는 단계
  *
  * Constraints 값에 따라 composable을 다르게 설정할 때 사용한다.
  */

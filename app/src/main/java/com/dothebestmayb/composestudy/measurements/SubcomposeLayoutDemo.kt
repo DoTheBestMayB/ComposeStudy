@@ -25,8 +25,8 @@ import com.dothebestmayb.composestudy.ui.theme.ComposeStudyTheme
 import kotlin.random.Random
 
 /**
- * Layout phase : measure children -> measure layout itself -> place children
- * Subcompose Layout phase : measure children -> subcompose -> measure layout itself -> place children
+ * Layout pass : measure children -> measure layout itself -> place children
+ * Subcompose Layout pass : measure children -> subcompose -> measure layout itself -> place children
  *
  * subcompose : 조건에 따라 특정한 children을 measure 할 수 있음
  *

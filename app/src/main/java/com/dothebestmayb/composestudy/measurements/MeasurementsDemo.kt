@@ -47,12 +47,12 @@ private val combinedConstraints = Constraints(
  * ex) padding modifier
  *
  * Composable이 그려질 때 3가지 과정을 거친다.
- * 1. Composition phase - What: 어떤 것을 그려야 할지 결정하는 단계
- * 2. Layout phase - Where: Layout의 child composable의 크기와 위치를 계산하는 단계
- * 3. drawing phase - How: 어떻게 그릴 것인지 결정하는 단계
+ * 1. Composition pass - What: 어떤 것을 그려야 할지 결정하는 단계
+ * 2. Layout pass - Where: Layout의 child composable의 크기와 위치를 계산하는 단계
+ * 3. drawing pass - How: 어떻게 그릴 것인지 결정하는 단계
  *
- * 여기서는 Layout phase - where에 대해 알아본다.
- * Layout phase 또한 3가지 과정을 거친다.
+ * 여기서는 Layout pass - where에 대해 알아본다.
+ * Layout pass 또한 3가지 과정을 거친다.
  * 1. mesaure child : child의 크기를 측정한다.
  * 2. measure itself(layout) : layout 자신의 크기를 측정한다.
  * 3. place child : child를 배치한다.
