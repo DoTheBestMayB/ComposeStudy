@@ -39,6 +39,16 @@ fun PagedRow(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
+    /**
+     * content : 표시할 UI Composable
+     * measurePolicy : measurables와 constraints를 가진 Composable
+     *
+     * measurables : Ui component we can measure that has a certain Dimension
+     * constraints : Parent로 전달받은 Constraints
+     *
+     * MeasurePolicy에서 해야 하는 것
+     * 1. measure measurables
+     */
     Layout(
         content = content,
         modifier = modifier
@@ -50,7 +60,8 @@ fun PagedRow(
 
         val placeables = measurables.map {
             // 각 child가 얼마나 크기를 차지하는지 설정
-            // The incoming minimum constraints in the video should be reset to 0. Otherwise, the children will be forced to stick to the parent constraints which can force them to fill the whole width when fillMaxWidth() is used.
+            // The incoming minimum constraints in the video should be reset to 0.
+            // Otherwise, the children will be forced to stick to the parent constraints which can force them to fill the whole width when fillMaxWidth() is used.
             it.measure(constraints.copy(minWidth = 0, minHeight = 0))
         }
 
@@ -79,6 +90,7 @@ fun PagedRow(
         layout(constraints.maxWidth, maxHeight) {
             var xOffset = 0
             pageItems.fastForEach { placeable ->
+                // child를 layout에 배치함
                 placeable.place(xOffset, 0)
                 xOffset += placeable.width
             }
