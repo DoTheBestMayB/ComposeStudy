@@ -34,8 +34,8 @@ import com.dothebestmayb.composestudy.ui.theme.ComposeStudyTheme
 import kotlinx.coroutines.launch
 
 /**
- * Scaffold는 content block에 paddingValue를 제공하는데, 이것은 topBar 영역이 차지하는 높이 값이다.
- * content가 topBar에 의해 가려지지 않도록 content block의 상위 layout modifier padding으로 적용해야 한다.
+ * Scaffold는 content block에 paddingValue를 제공하는데, 이것은 화면이 status bar와 겹치지 않도록 제공되는 padding 값이다.
+ * Layout이 status bar에 의해 가려지지 않도록 content block의 상위 layout modifier padding으로 적용해야 한다.
  */
 @Composable
 fun ScaffoldDemo(modifier: Modifier = Modifier) {
