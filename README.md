@@ -16,9 +16,9 @@
 
 ---
 
-## 🏗️ Basic Layout & Responsiveness
+## 🏗️Basic Layout & Responsiveness
 
-### 📌 Flow Layout
+### 📌Flow Layout
 🔗 [FlowLayoutDemo.kt](https://github.com/DoTheBestMayB/ComposeStudy/blob/master/app/src/main/java/com/dothebestmayb/composestudy/basic_layout/FlowLayoutDemo.kt)
 
 줄에 표시할 최대 아이템 개수를 지정하고, 해당 개수보다 많아지면 다음 줄에 표시함.
@@ -28,7 +28,7 @@
 
 ---
 
-### 📌 LazyList
+### 📌LazyList
 🔗 [LazyListDemo.kt](https://github.com/DoTheBestMayB/ComposeStudy/blob/master/app/src/main/java/com/dothebestmayb/composestudy/basic_layout/LazyListDemo.kt)
 
 - `modifier`의 `padding`은 `margin`처럼 동작한다.  `contentPadding`은 일반적으로 말하는 `padding`처럼 동작.
@@ -41,7 +41,7 @@
 
 ---
 
-### 📌 LazyGrid
+### 📌LazyGrid
 🔗 [LazyGridDemo.kt](https://github.com/DoTheBestMayB/ComposeStudy/blob/master/app/src/main/java/com/dothebestmayb/composestudy/basic_layout/LazyGridDemo.kt)
 
 박스 형식으로 아이템을 쌓는 Layout
@@ -59,7 +59,7 @@ LazyVerticalGrid에서도 각 아이템이 다양한 Height를 가질 수는 있
 
 ---
 
-### 📌 Scaffold
+### 📌Scaffold
 🔗 [ScaffoldDemo.kt](https://github.com/DoTheBestMayB/ComposeStudy/blob/master/app/src/main/java/com/dothebestmayb/composestudy/basic_layout/ScaffoldDemo.kt)
 
 - Scaffold는 content block에 paddingValue를 제공하는데, 이것은 화면이 status bar와 겹치지 않도록 제공되는 padding 값이다.
@@ -67,13 +67,13 @@ LazyVerticalGrid에서도 각 아이템이 다양한 Height를 가질 수는 있
 
 ---
 
-### 📌 ConstraintLayout
+### 📌ConstraintLayout
 
 Compose에서는 View와 달리 hierarchy depth가 문제 되지 않는다. Preview가 없으면 composable이 어떻게 생겼는지 코드만 보고는 예측하기 어려우므로, 가능하면 Box, Column, Row 등을 사용하고 필요한 경우에만 ConstraintLayout을 사용하자.
 
 ---
 
-### 📌 WindowSizeClass
+### 📌WindowSizeClass
 🔗 [WindowSizeClassDemo.kt](https://github.com/DoTheBestMayB/ComposeStudy/blob/master/app/src/main/java/com/dothebestmayb/composestudy/basic_layout/WindowSizeClassDemo.kt)
 🔗 [HotelBookingScreen.kt](https://github.com/DoTheBestMayB/ComposeStudy/blob/master/app/src/main/java/com/dothebestmayb/composestudy/basic_layout/HotelBookingScreen.kt)
 
@@ -91,7 +91,7 @@ Compose에서는 View와 달리 hierarchy depth가 문제 되지 않는다. Prev
 
 ---
 
-# 🚀 배운 내용 응용해서 구현하기
+# 🚀배운 내용 응용해서 구현하기
 
 ## 🗂️ basic_modifier
 
