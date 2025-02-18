@@ -24,6 +24,10 @@ import androidx.compose.ui.unit.dp
 import com.dothebestmayb.composestudy.ui.theme.ComposeStudyTheme
 import kotlinx.coroutines.delay
 
+/**
+ * rememberUpdatedState는 LaunchedEffect를 다시 실행하도록 하는 것이 아니라, 최신 데이터를 참조하도록 설정하는 것임
+ * 예를 들어, 아래 코드에서 5초가 지나기 전과 후의 userName이 다르다면, updatedUserName은 항상 최신 userName을 가리킴
+ */
 @Composable
 fun LaunchAnimation(
     snackbarHostState: SnackbarHostState,
