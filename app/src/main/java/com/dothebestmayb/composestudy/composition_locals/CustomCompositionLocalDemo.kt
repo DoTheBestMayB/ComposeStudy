@@ -26,7 +26,7 @@ import com.dothebestmayb.composestudy.ui.theme.ComposeStudyTheme
  * 예를 들어, LocalViewModel이라는 CompositionLocal을 만들었다고 하자.
  * ViewModel이 없는 Composition에서 LocalViewModel을 호출하면 null(또는 Exception)을 반환할 것이다.
  *
- * 또 다른 예시로, LocalNa vController를 만든다면, Navigation Component를 사용하지 않는 Activity에서는 null(또는 Exception)을 반환할 것이다.
+ * 또 다른 예시로, LocalNav Controller를 만든다면, Navigation Component를 사용하지 않는 Activity에서는 null(또는 Exception)을 반환할 것이다.
  */
 @Composable
 fun CustomCompositionLocalDemo(modifier: Modifier = Modifier) {
