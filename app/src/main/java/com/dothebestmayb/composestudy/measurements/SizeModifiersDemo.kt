@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -222,6 +223,75 @@ fun RequireWidthExample(modifier: Modifier = Modifier) {
 }
 
 /**
+ * 두 번째 Box는 첫 번째 Box가 차지하고 남은 공간의 가운데에서부터 양쪽 대칭으로 그려진다.
+ * Preview에서 두 번째 Box의 H가 그려지는 위치를 보면 이를 확인할 수 있다.
+ * 또한 첫 번째 Box의 requiredWidth 값을 변경하더라도, 두 번째 Box의 H는 항상 남은 공간의 중앙에 위치함을 알 수 있다.
+ */
+@Composable
+fun RequireWidthExample2(modifier: Modifier = Modifier) {
+    Row(
+        modifier = Modifier
+            .height(100.dp)
+            .fillMaxSize()
+            .background(Color.Red)
+    ) {
+        Box(
+            modifier = Modifier
+                .height(100.dp)
+                .requiredWidth(300.dp)
+                .background(Color.Yellow),
+            contentAlignment = Alignment.Center
+        ) {
+            Text("H")
+        }
+        Box(
+            modifier = Modifier
+                .height(100.dp)
+                .requiredWidth(300.dp)
+                .background(Color.Green),
+            contentAlignment = Alignment.Center
+        ) {
+            Text("H")
+        }
+    }
+}
+
+/**
+ * layout system은 child를 남은 공간의 중앙에 배치한다. wrapContentWidth를 사용하면 이 배치 조건을 변경할 수 있다.
+ * https://developer.android.com/develop/ui/compose/modifiers#:~:text=modifier%20takes%20precedence.-,Note,-%3A%20Layouts%20are
+ */
+@Composable
+fun WrapContentWidthExample(modifier: Modifier = Modifier) {
+    Row(
+        modifier = Modifier
+            .height(100.dp)
+            .fillMaxSize()
+            .background(Color.Red)
+    ) {
+        Box(
+            modifier = Modifier
+                .height(100.dp)
+                .requiredWidth(300.dp)
+                .background(Color.Yellow),
+            contentAlignment = Alignment.Center
+        ) {
+            Text("H")
+        }
+        Box(
+            modifier = Modifier
+                .height(100.dp)
+                .wrapContentWidth(Alignment.Start, unbounded = true)
+                .requiredWidth(300.dp)
+                .background(Color.Green),
+            contentAlignment = Alignment.Center
+        ) {
+            Text("H")
+        }
+    }
+}
+
+
+/**
  * wrapContentWidth는 Content의 크기에 맞는 최소한의 크기로 minWidth, maxWidth를 설정한다.
  * wrapContentWidth를 설정하더라도, 앞에서 modifier를 이용해 width 크기를 설정하면 해당 크기는 그대로 적용된다.
  *
@@ -288,6 +358,6 @@ fun WrapContentExample2(modifier: Modifier = Modifier) {
 @Composable
 private fun SizeModifierDemoPreview() {
     ComposeStudyTheme {
-        WrapContentExample2()
+        RequireWidthExample2()
     }
 }
