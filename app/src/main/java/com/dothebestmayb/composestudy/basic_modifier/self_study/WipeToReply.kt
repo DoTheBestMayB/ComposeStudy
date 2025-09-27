@@ -5,6 +5,7 @@ import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.AnchoredDraggableDefaults
 import androidx.compose.foundation.gestures.AnchoredDraggableState
 import androidx.compose.foundation.gestures.DraggableAnchors
 import androidx.compose.foundation.gestures.Orientation
@@ -178,8 +179,6 @@ fun WipeToReply(
             items(items = state.messages, key = { it.messageId }) { messageInfo ->
                 val messageOverscroll = ScrollableDefaults.overscrollEffect()
 
-                val decayAnimationSpec = rememberSplineBasedDecay<Float>()
-
                 val messageDragState = remember {
                     AnchoredDraggableState(
                         initialValue = SwipeToReplyValue.RESTING,
@@ -194,18 +193,16 @@ fun WipeToReply(
                             SwipeToReplyValue.RESTING at 0f
                             SwipeToReplyValue.REPLYING at replyOffset
                         },
-                        positionalThreshold = { density ->
-                            density * 0.5f
-                        },
-                        velocityThreshold = {
-                            with(density) {
-                                100.dp.toPx()
-                            }
-                        },
-                        snapAnimationSpec = tween(),
-                        decayAnimationSpec = decayAnimationSpec,
                     )
                 }
+
+                val flingBehavior = AnchoredDraggableDefaults.flingBehavior(
+                    state = messageDragState,
+                    positionalThreshold = { density ->
+                        density * 0.5f
+                    },
+                    animationSpec = tween(),
+                )
 
                 LaunchedEffect(messageDragState) {
                     snapshotFlow { messageDragState.settledValue }
@@ -227,6 +224,7 @@ fun WipeToReply(
                         .padding(start = 12.dp)
                         .anchoredDraggable(
                             state = messageDragState,
+                            flingBehavior = flingBehavior,
                             orientation = Orientation.Horizontal,
                             overscrollEffect = messageOverscroll,
                         )

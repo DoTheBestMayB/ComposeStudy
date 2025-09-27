@@ -2,11 +2,13 @@
 
 package com.dothebestmayb.composestudy.basic_modifier
 
+import android.R.attr.orientation
 import androidx.compose.animation.core.DecayAnimation
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.AnchoredDraggableDefaults
 import androidx.compose.foundation.gestures.AnchoredDraggableState
 import androidx.compose.foundation.gestures.DraggableAnchors
 import androidx.compose.foundation.gestures.Orientation
@@ -20,6 +22,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.SwipeToDismissBoxDefaults.positionalThreshold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,28 +56,24 @@ fun DraggableModifiersDemo(modifier: Modifier = Modifier) {
         mutableStateOf(Offset.Zero)
     }
 
-    val density = LocalDensity.current
-    val decayAnimationSpec = rememberSplineBasedDecay<Float>()
-
     val anchorDragState = remember {
-        AnchoredDraggableState<DragAnchors>(
+        AnchoredDraggableState(
             initialValue = DragAnchors.RESTING,
             anchors = DraggableAnchors {
                 DragAnchors.RESTING at 0f
                 DragAnchors.End at 300f
             },
-            positionalThreshold = { density ->
-                density * 0.5f
-            },
-            velocityThreshold = {
-                with(density) {
-                    100.dp.toPx()
-                }
-            },
-            snapAnimationSpec = tween(),
-            decayAnimationSpec = decayAnimationSpec,
         )
     }
+
+    // velocity 값이 크면 내부에 정의된 decayAnimationSpec을 이용함
+    val flingBehavior = AnchoredDraggableDefaults.flingBehavior(
+        state = anchorDragState,
+        positionalThreshold = { density ->
+            density * 0.5f
+        },
+        animationSpec = tween(),
+    )
 
     Box(
         modifier = modifier
@@ -113,6 +112,7 @@ fun DraggableModifiersDemo(modifier: Modifier = Modifier) {
                 }
                 .anchoredDraggable(
                     state = anchorDragState,
+                    flingBehavior = flingBehavior,
                     orientation = Orientation.Horizontal,
                 )
                 .clip(CircleShape)
