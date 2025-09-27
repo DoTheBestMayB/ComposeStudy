@@ -31,6 +31,8 @@ fun FlowLayoutDemo(modifier: Modifier = Modifier) {
         mutableIntStateOf(4)
     }
 
+    // overflow deprecated 되었지만, 대안은 개발 중이라고 함. 필요하면 deprecated 된 기존 코드를 상황에 맞게 직접 수정해서 사용하는 것을 권장
+    // https://android-developers.googleblog.com/2025/04/whats-new-in-jetpack-compose-april-25.html
     FlowRow(
         modifier = Modifier
             .fillMaxSize(),
