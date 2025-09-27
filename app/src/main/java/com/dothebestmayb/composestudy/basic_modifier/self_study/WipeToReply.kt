@@ -28,6 +28,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.overscroll
+import androidx.compose.foundation.rememberOverscrollEffect
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
@@ -177,7 +178,7 @@ fun WipeToReply(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             items(items = state.messages, key = { it.messageId }) { messageInfo ->
-                val messageOverscroll = ScrollableDefaults.overscrollEffect()
+                val messageOverscroll = rememberOverscrollEffect()
 
                 val messageDragState = remember {
                     AnchoredDraggableState(
