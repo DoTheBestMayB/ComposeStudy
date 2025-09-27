@@ -1,19 +1,15 @@
 package com.dothebestmayb.composestudy.side_effects
 
-import android.graphics.drawable.Icon
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,8 +18,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.dothebestmayb.composestudy.R
 import com.dothebestmayb.composestudy.ui.theme.ComposeStudyTheme
 import kotlinx.coroutines.launch
 
@@ -80,11 +78,11 @@ fun DerivedStateOfDemo(modifier: Modifier = Modifier) {
      * derivedStateOf는 Compose State임
      * derivedStateOf 람다 블록 결괏값이 변경되는 경우에만 state가 갱신됨
      */
-/*    val showScrollToTopButton by remember {
-        derivedStateOf {
-            state.firstVisibleItemIndex >= 10
-        }
-    }*/
+    /*    val showScrollToTopButton by remember {
+            derivedStateOf {
+                state.firstVisibleItemIndex >= 10
+            }
+        }*/
 
     /**
      * derivedStateOf와 remember + key의 recomposition 횟수가 동일한 경우 무엇을 써야 할까?
@@ -141,7 +139,7 @@ fun DerivedStateOfDemo(modifier: Modifier = Modifier) {
                 .wrapContentSize(Alignment.BottomEnd)
         ) {
             Icon(
-                imageVector = Icons.Default.KeyboardArrowUp,
+                painter = painterResource(R.drawable.outline_keyboard_arrow_up_24),
                 contentDescription = "",
             )
         }

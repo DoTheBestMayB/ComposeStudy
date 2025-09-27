@@ -7,9 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -24,11 +21,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
+import com.dothebestmayb.composestudy.R
 import com.dothebestmayb.composestudy.ui.theme.ComposeStudyTheme
 
 /**
@@ -137,10 +136,10 @@ private fun OverflowLayoutPreview() {
                         }
                     ) {
                         Icon(
-                            imageVector = if (!isOverFlowing) {
-                                Icons.Default.KeyboardArrowDown
+                            painter = if (!isOverFlowing) {
+                                painterResource(R.drawable.outline_keyboard_arrow_down_24)
                             } else {
-                                Icons.Default.KeyboardArrowUp
+                                painterResource(R.drawable.outline_keyboard_arrow_up_24)
                             },
                             contentDescription = null,
                         )

@@ -29,11 +29,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.overscroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.automirrored.filled.Send
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -54,6 +49,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
@@ -62,6 +58,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.dothebestmayb.composestudy.R
 import com.dothebestmayb.composestudy.ui.theme.ComposeStudyTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
@@ -90,7 +87,7 @@ fun Message(
     ) {
         if (messageInfo.sender == MessageSender.OTHER) {
             Icon(
-                imageVector = Icons.Default.AccountCircle,
+                painter = painterResource(R.drawable.outline_account_circle_24),
                 contentDescription = null,
                 tint = Color(0xFFE87457),
                 modifier = Modifier
@@ -116,7 +113,7 @@ fun Message(
 
             )
             Icon(
-                imageVector = Icons.Default.AccountCircle,
+                painter = painterResource(R.drawable.outline_account_circle_24),
                 contentDescription = null,
                 tint = Color(0xFFE87457),
                 modifier = Modifier
@@ -262,7 +259,7 @@ fun WipeToReply(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                        painter = painterResource(R.drawable.outline_arrow_forward_24),
                         contentDescription = "Reply Message",
                     )
                     Column(
@@ -293,7 +290,7 @@ fun WipeToReply(
                         }
                     ) {
                         Icon(
-                            imageVector = Icons.Default.Clear,
+                            painter = painterResource(R.drawable.baseline_clear_24),
                             contentDescription = "clear reply target",
                         )
                     }
@@ -322,7 +319,7 @@ fun WipeToReply(
                     },
                 ) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Default.Send,
+                        painter = painterResource(R.drawable.baseline_send_24),
                         contentDescription = "Send Message."
                     )
                 }

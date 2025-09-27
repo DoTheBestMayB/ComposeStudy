@@ -7,9 +7,6 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.FlowRowOverflow
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,8 +18,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.dothebestmayb.composestudy.R
 import com.dothebestmayb.composestudy.ui.theme.ComposeStudyTheme
 
 
@@ -50,7 +49,7 @@ fun FlowLayoutDemo(modifier: Modifier = Modifier) {
                     }
                 ) {
                     Icon(
-                        imageVector = Icons.Default.KeyboardArrowDown,
+                        painter = painterResource(R.drawable.outline_keyboard_arrow_down_24),
                         contentDescription = null,
                     )
                 }
@@ -62,7 +61,7 @@ fun FlowLayoutDemo(modifier: Modifier = Modifier) {
                     }
                 ) {
                     Icon(
-                        imageVector = Icons.Default.KeyboardArrowUp,
+                        painter = painterResource(R.drawable.outline_keyboard_arrow_up_24),
                         contentDescription = null,
                     )
                 }

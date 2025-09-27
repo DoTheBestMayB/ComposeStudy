@@ -11,10 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -60,7 +56,7 @@ fun Post(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
-                imageVector = Icons.Default.Check,
+                painter = painterResource(R.drawable.baseline_check_24),
                 contentDescription = null,
                 tint = Color.White,
                 modifier = Modifier
@@ -101,7 +97,7 @@ fun Post(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Icon(
-                imageVector = Icons.Default.Check,
+                painter = painterResource(R.drawable.baseline_check_24),
                 contentDescription = null,
                 tint = Color.Transparent,
                 modifier = Modifier
