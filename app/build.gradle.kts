@@ -56,6 +56,9 @@ dependencies {
     implementation(libs.androidx.adaptive.android)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
