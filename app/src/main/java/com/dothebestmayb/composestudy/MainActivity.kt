@@ -19,6 +19,7 @@ import com.dothebestmayb.composestudy.basic_modifier.self_study.WipeToReplyRoot
 import com.dothebestmayb.composestudy.measurements.SizeModifierDemo
 import com.dothebestmayb.composestudy.measurements.SizePositionModifiersDemo
 import com.dothebestmayb.composestudy.measurements.WidthExample
+import com.dothebestmayb.composestudy.performance_optimization.LazyListPerformance
 import com.dothebestmayb.composestudy.state_management.home_work.TodoScreenRoot
 import com.dothebestmayb.composestudy.ui.theme.ComposeStudyTheme
 
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposeStudyTheme {
-                SizePositionModifiersDemo()
+                LazyListPerformance()
 //                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 //                    WipeToReplyRoot(modifier = Modifier.padding(innerPadding))
 //                }

@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ComposeStudy"
 include(":app")
+include(":app:baselineprofile")
