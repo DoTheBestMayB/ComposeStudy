@@ -16,7 +16,11 @@ inline fun Modifier.applyIf(
     modifier: Modifier.() -> Modifier,
 ): Modifier {
     return if (condition) {
-        this.then(modifier())
+        // 아래와 같이 작성하면 this.then(this.modifier())와 코드가 동일하며
+        // modifier가 두 번 적용되는 것과 동일하다.
+//        this.then(modifier())
+
+        modifier()
     } else {
         this
     }
